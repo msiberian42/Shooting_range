@@ -30,5 +30,11 @@
                 agent.SetDestination(target.position);
             }
         }
+
+        public virtual void OnTargetReached()
+        {
+            target = null;
+            gameObject.SetActive(false);
+        }
     }
 }
