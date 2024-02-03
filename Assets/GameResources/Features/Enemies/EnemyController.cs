@@ -12,6 +12,7 @@
         protected NavMeshAgent agent = default;
         protected EnemyTargetsController targetsController = default;
         protected Transform target = default;
+        protected EnemyPoolManager poolManager = default;
 
         protected virtual void Awake()
         {
@@ -20,6 +21,7 @@
             agent.updateUpAxis = false;
 
             targetsController = FindAnyObjectByType<EnemyTargetsController>();
+            poolManager = FindAnyObjectByType<EnemyPoolManager>();
         }
 
         protected virtual void OnEnable()
@@ -34,7 +36,7 @@
         public virtual void OnTargetReached()
         {
             target = null;
-            gameObject.SetActive(false);
+            poolManager.ReleaseEnemy(this);
         }
     }
 }
